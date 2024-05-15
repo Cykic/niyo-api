@@ -26,7 +26,7 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-[POSTMAN](https://documenter.getpostman.com/view/34965333/2sA3JRYeY4) Postman Documentation
+[API DOCS](https://documenter.getpostman.com/view/34965333/2sA3JRYeY4) API Postman Documentation https://documenter.getpostman.com/view/34965333/2sA3JRYeY4)
 
 ## Installation
 
@@ -73,5 +73,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
 # niyo-api
+
 # niyo-api
