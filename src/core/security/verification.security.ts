@@ -37,4 +37,11 @@ export class VerificationSecurity {
   hash(text: string) {
     return bcrypt.hashSync(text, bcrypt.genSaltSync());
   }
+
+  compare(text: string, hashedText: string) {
+    if (!text || !hashedText) {
+      return false;
+    }
+    return bcrypt.compareSync(text, hashedText);
+  };
 }

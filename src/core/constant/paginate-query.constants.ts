@@ -4,4 +4,8 @@ export class PaginateQuery {
   @IsString()
   @IsOptional()
   search: string;
+
+  @IsString()
+  @IsOptional()
+  sort: string;
 }

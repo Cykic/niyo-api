@@ -11,16 +11,7 @@ import { WebEmail } from 'src/core/email/webEmail';
 @Module({
   controllers: [AuthController],
   providers: [AuthService, VerificationSecurity, WebEmail],
-  imports: [
-    MongooseModule.forFeature(MongoDBSchema),
-    JwtModule.registerAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        secret: configService.get('JWT_SECRET'),
-        signOptions: { expiresIn: `${configService.get('JWT_EXPIRY')}s` },
-      }),
-      inject: [ConfigService],
-    }),
-  ],
+  imports: [MongooseModule.forFeature(MongoDBSchema), JwtModule],
+  exports: [AuthService],
 })
 export class AuthModule {}

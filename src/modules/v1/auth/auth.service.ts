@@ -1,4 +1,8 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
@@ -6,6 +10,7 @@ import { Model } from 'mongoose';
 import { WebEmail } from 'src/core/email/webEmail';
 import { VerificationSecurity } from 'src/core/security/verification.security';
 import { User, UserDocument } from '../users/entities/user.entity';
+import { LoginDto } from './dto/login.dto';
 import { RegisterUserDto } from './dto/register.dto';
 
 @Injectable()
@@ -54,15 +59,44 @@ export class AuthService {
    * @param {UserDocument} user
    * @returns
    */
-  async login(user: UserDocument) {
+  async generateToken(user: UserDocument) {
     const payload = { username: user.email, sub: user.id };
     const token = this.jwtService.sign(payload, {
       expiresIn: this.configService.get('JWT_EXPIRY'),
       secret: this.configService.get('JWT_SECRET'),
     });
+    return token;
+  }
+
+  async login(body: LoginDto) {
+    //Check for email in web and mobile db
+    const user = await this.userModel
+      .findOne({
+        email: body.email,
+      })
+      .select('+password');
+
+    if (!user)
+      throw new BadRequestException(
+        'No user found with this details, Please sign up',
+      );
+
+    if (user.suspended)
+      throw new BadRequestException('Account is suspended, contact support');
+
+    //Check password
+    const isPasswordCorrect = this.verificationSecurity.compare(
+      body.password,
+      user.password,
+    );
+
+    if (!isPasswordCorrect) throw new BadRequestException('Incorrect Password');
+
     return {
+      token: await this.generateToken(user),
       id: user.id,
-      token,
+      firstName: user.firstName,
+      lastName: user.lastName,
     };
   }
 }
