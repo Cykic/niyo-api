@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { APIRes } from 'src/core/common/api-response';
 import { Protected } from 'src/core/decorators/access.decorator';
 import { LoggedInUser } from 'src/core/decorators/logged-in-decorator';
