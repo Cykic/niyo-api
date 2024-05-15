@@ -1,23 +1,24 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, SchemaTypes } from 'mongoose';
+import { User, UserDocument } from '../../users/entities/user.entity';
 
 export type TaskDocument = Task & Document;
 @Schema({ timestamps: true, versionKey: false })
 export class Task {
-  @Prop({ unique: true, lowercase: true })
-  email: string;
+  @Prop({ trim: true })
+  name: string;
 
   @Prop()
-  firstName: string;
+  description: string;
 
-  @Prop()
-  lastName: string;
+  @Prop({ default: false })
+  completed: string;
 
-  @Prop()
-  phone: string;
-
-  @Prop()
-  countryCode: string;
+  @Prop({
+    ref: User.name,
+    type: SchemaTypes.ObjectId,
+  })
+  user: UserDocument;
 }
 const TaskSchema = SchemaFactory.createForClass(Task).set('toJSON', {
   virtuals: true,

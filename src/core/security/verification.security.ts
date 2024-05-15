@@ -1,5 +1,7 @@
 import { randomBytes } from 'node:crypto';
 import { Injectable } from '@nestjs/common';
+import * as bcrypt from 'bcryptjs';
+
 
 @Injectable()
 export class VerificationSecurity {
@@ -30,5 +32,9 @@ export class VerificationSecurity {
     const expiry = new Date(resetExpiry);
     if (expiry > now) return true;
     return false;
+  }
+
+  hash(text: string) {
+    return bcrypt.hashSync(text, bcrypt.genSaltSync());
   }
 }

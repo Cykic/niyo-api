@@ -14,17 +14,14 @@ export class User {
   @Prop({ default: null })
   lastName: string;
 
-  @Prop({ default: null })
-  phone: string;
-
-  @Prop({ default: '+44' })
-  countryCode: string;
-
   @Prop({ default: false })
   suspended: boolean;
 
   @Prop({ default: false })
   deleted: boolean;
+
+  @Prop({ select: false })
+  password: string;
 }
 const UserSchema = SchemaFactory.createForClass(User).set('toJSON', {
   virtuals: true,
