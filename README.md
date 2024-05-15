@@ -2,7 +2,7 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-[DB] Mongo DB.
+[DATABASE] Mongo DB.
 
 [API DOCS](https://documenter.getpostman.com/view/34965333/2sA3JRYeY4) API Postman Documentation https://documenter.getpostman.com/view/34965333/2sA3JRYeY4)
 
