@@ -11,7 +11,7 @@ export class AuthController {
   @Post('/register')
   async create(@Body() createTaskDto: RegisterUserDto) {
     const user = await this.authService.registerUser(createTaskDto);
-    return APIRes(UseGuards, 'User created');
+    return APIRes(user, 'User created');
   }
 
   @Post('/login')

@@ -51,6 +51,7 @@ export class AuthService {
       `${user.firstName} ${user.lastName}`,
       user.email,
     );
+    user.password = undefined;
     return user;
   }
 
@@ -60,10 +61,10 @@ export class AuthService {
    * @returns
    */
   async generateToken(user: UserDocument) {
-    const payload = { username: user.email, sub: user.id };
+    const payload = { sub: user.id };
     const token = this.jwtService.sign(payload, {
       expiresIn: this.configService.get('JWT_EXPIRY'),
-      secret: this.configService.get('JWT_SECRET'),
+      secret: this.configService.get('ACCESS_TOKEN_SECRET'),
     });
     return token;
   }

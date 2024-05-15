@@ -85,9 +85,9 @@ export class AuthGuard implements CanActivate {
       console.log(e.message);
       throw new HttpException('Session expired, refresh token', 440);
     }
-    if (!data.id)
+    if (!data.sub)
       throw new ForbiddenException('Invalid Token, provide access token');
     // token verification for user
-    return { id: data.id };
+    return { id: data.sub };
   }
 }

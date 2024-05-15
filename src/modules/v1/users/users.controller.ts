@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { APIRes } from 'src/core/common/api-response';
 import { Protected } from 'src/core/decorators/access.decorator';
 import { LoggedInUser } from 'src/core/decorators/logged-in-decorator';
 import { UserDocument } from './entities/user.entity';
@@ -17,7 +18,7 @@ export class UsersController {
 
   @Get('me')
   @Protected()
-  findOne(@Param('id') id: string, @LoggedInUser() user: UserDocument) {
-    return user;
+  findOne(@LoggedInUser() user: UserDocument) {
+    return APIRes(user, 'User details fetched');
   }
 }
