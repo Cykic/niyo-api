@@ -69,6 +69,11 @@ export class AuthService {
     return token;
   }
 
+  /**
+   *
+   * @param {LoginDto} body
+   * @returns
+   */
   async login(body: LoginDto) {
     //Check for email in web and mobile db
     const user = await this.userModel

@@ -35,7 +35,7 @@ export class AuthGuard implements CanActivate {
     // 2. Verify token is valid and for user
     const { id } = await this.verifyToken(token);
 
-    // if user is not admin pass user information to request.user
+    // user information to request.user
     const user = await this.authService.getUserById(id);
 
     if (user.suspended)
@@ -70,14 +70,12 @@ export class AuthGuard implements CanActivate {
    * @method verifyToken
    *
    * @param {string} token token
-   * @param {object} request request object
    * @description This method verifies token & extracts information
    * @return Id
    */
   private async verifyToken(token: string) {
     let data;
     try {
-      // token verification for admin
       data = this.jwtService.verify(token, {
         secret: process.env.ACCESS_TOKEN_SECRET,
       });

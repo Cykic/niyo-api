@@ -8,7 +8,6 @@ import {
   Logger,
 } from '@nestjs/common';
 import { ERROR_MESSAGE } from '../constant/validation-error-message.constant';
-import { prettify, ucfirst } from '../utils/string.util';
 import { Response } from 'express';
 
 @Catch()
@@ -35,10 +34,7 @@ export class ErrorFilter implements ExceptionFilter {
         exceptionResource = (
           exception as BadRequestException
         ).getResponse() as any;
-        message =
-          typeof exceptionResource?.message === 'string'
-            ? `${exceptionResource.message}`
-            : `${ucfirst(prettify(exceptionResource.message[0] ?? ''))}`;
+        message = `${exceptionResource.message}`;
 
         break;
       case 503:

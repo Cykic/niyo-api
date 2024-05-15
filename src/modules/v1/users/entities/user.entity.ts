@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { CountryCode } from 'src/core/helper/phone.helper';
 
 export type UserDocument = User & Document;
 @Schema({ timestamps: true, versionKey: false })
