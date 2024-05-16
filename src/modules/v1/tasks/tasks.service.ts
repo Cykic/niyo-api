@@ -3,6 +3,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { FilterQuery, Model } from 'mongoose';
 import { PaginateQuery } from 'src/core/constant/paginate-query.constants';
+import { TaskEvent } from 'src/core/socket/dto/message-payload';
+import { SocketGateway } from 'src/core/socket/socket.gateway';
 import { UserDocument } from '../users/entities/user.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
@@ -10,7 +12,10 @@ import { Task, TaskDocument } from './entities/task.entity';
 
 @Injectable()
 export class TasksService {
-  constructor(@InjectModel(Task.name) private taskModel: Model<TaskDocument>) {}
+  constructor(
+    @InjectModel(Task.name) private taskModel: Model<TaskDocument>,
+    private readonly socketGateway: SocketGateway,
+  ) {}
   /**
    * Find all tasks of a user
    * @param {UserDocument} user
@@ -69,6 +74,9 @@ export class TasksService {
       updateTaskDto,
       { new: true },
     );
+
+    this.socketGateway.emitToUser(user.id, TaskEvent.UPDATED, task);
+
     return task;
   }
 
@@ -82,7 +90,12 @@ export class TasksService {
     user: UserDocument,
     createTaskDto: CreateTaskDto,
   ): Promise<TaskDocument> {
-    return await this.taskModel.create({ ...createTaskDto, user: user.id });
+    const task = await this.taskModel.create({
+      ...createTaskDto,
+      user: user.id,
+    });
+    this.socketGateway.emitToUser(user.id, TaskEvent.CREATED, task);
+    return task;
   }
 
   /**
@@ -92,7 +105,9 @@ export class TasksService {
    * @returns
    */
   async deleteTask(user: UserDocument, id: string) {
+    const task = await this.findOneTask(user, id);
     await this.taskModel.findOneAndDelete({ _id: id, user: user.id });
+    this.socketGateway.emitToUser(user.id, TaskEvent.DELETED, task);
     return null;
   }
 }

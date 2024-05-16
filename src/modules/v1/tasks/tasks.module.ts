@@ -5,10 +5,11 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { MongoDBSchema } from 'src/core/database/MongooseDBSchema';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthModule } from '../auth/auth.module';
+import { SocketGateway } from 'src/core/socket/socket.gateway';
 
 @Module({
   controllers: [TasksController],
-  providers: [TasksService],
+  providers: [TasksService, SocketGateway],
   imports: [MongooseModule.forFeature(MongoDBSchema), JwtModule, AuthModule],
 })
 export class TasksModule {}
