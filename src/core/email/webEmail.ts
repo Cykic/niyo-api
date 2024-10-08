@@ -28,9 +28,9 @@ export class WebEmail {
   }
 
   sendWelcomeEmail(name: string, email: string) {
-    const title = 'Welcome to Niyo 🎉';
+    const title = 'Welcome to Cotrackr 🎉';
     const message =
-      'Your account has been created successfully, Thank you for joining us at Niyo';
+      'Your account has been created successfully, Thank you for joining us at Cotrackr';
     this.sendNotificationEmail(name, email, title, message);
   }
 
@@ -41,7 +41,7 @@ export class WebEmail {
     body: string,
   ) {
     const mailOptions = {
-      from: '"Niyo Team" <noreply@niyo.co>', // sender address
+      from: '"Cotrackr Team" <noreply@cotrackr.co>', // sender address
       to: email, // list of receivers
       subject: title,
       template: 'notification_email', // the name of the template file i.e email.handlebars
