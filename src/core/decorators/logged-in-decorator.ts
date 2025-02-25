@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { UserDocument } from 'src/modules/v1/users/entities/user.entity';
+import { UserDocument } from 'src/modules/v1/users/schema/user.schema';
 
 // Admin decorator
 export const LoggedInUser = createParamDecorator(

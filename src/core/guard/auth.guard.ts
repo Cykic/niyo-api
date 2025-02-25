@@ -12,7 +12,7 @@ import { JwtService } from '@nestjs/jwt';
 import { RequestHeaders } from '../constant/header.constant';
 import { AuthService } from 'src/modules/v1/auth/auth.service';
 import { IRequest } from '../constant/response.constant';
-import { UserDocument } from 'src/modules/v1/users/entities/user.entity';
+import { UserDocument } from 'src/modules/v1/users/schema/user.schema';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -40,12 +40,12 @@ export class AuthGuard implements CanActivate {
 
     if (user.suspended)
       throw new BadRequestException(
-        'This account has been suspended, contact support support@niyo.co',
+        'This account has been suspended, contact support support@cotrackr.com',
       );
 
     if (user.deleted)
       throw new BadRequestException(
-        'This account has been deleted, contact support support@niyo.co',
+        'This account has been deleted, contact support support@cotrackr.com',
       );
     request.user = user;
 

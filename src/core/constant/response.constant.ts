@@ -1,4 +1,4 @@
-import { UserDocument } from 'src/modules/v1/users/entities/user.entity';
+import { UserDocument } from 'src/modules/v1/users/schema/user.schema';
 
 export enum ResponseStatus {
   SUCCESS = 'success',

@@ -9,7 +9,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { WebEmail } from 'src/core/email/webEmail';
 import { VerificationSecurity } from 'src/core/security/verification.security';
-import { User, UserDocument } from '../users/entities/user.entity';
+import { User, UserDocument } from '../users/schema/user.schema';
 import { LoginDto } from './dto/login.dto';
 import { RegisterUserDto } from './dto/register.dto';
 
