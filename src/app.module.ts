@@ -6,7 +6,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CoreModule } from './core/core.module';
-import { MongoDBSchema } from './core/database/MongooseDBSchema';
 import { ErrorFilter } from './core/error/error.filter';
 import { V1Module } from './modules/v1/v1.module';
 

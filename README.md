@@ -4,7 +4,7 @@
 
 DATABASE - Mongo DB.
 
-[API DOCS](https://documenter.getpostman.com/view/34965333/2sA3JRYeY4) API Postman Documentation - https://documenter.getpostman.com/view/34965333/2sA3JRYeY4)
+[API DOCS](https://documenter.getpostman.com/view/34965333/2sA3kRKjPc) API Postman Documentation - https://documenter.getpostman.com/view/34965333/2sA3kRKjPc)
 
 [BASEURL](https://niyo-api.onrender.com/api) - https://niyo-api.onrender.com/api
 
